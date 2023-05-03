@@ -17,5 +17,6 @@ papers = [
     ["https://www.dailymail.co.uk/home/index.html", "Mail Online", "h2", "linkro-darkred", 16, "mail"],
     ["https://www.dailyrecord.co.uk", "Daily Record", "a", "headline publication-font", 17, "record"],
     ["https://www.irishtimes.com", "Irish Times", "a", "text_decoration_none color_custom_black_1", 18, "irishtimes"],
-
+    ["https://www.irishexaminer.com", "Irish Examiner", "h5", "card-title top-main-title", 19, "irishexaminer"],
+    ["https://www.irishpost.com", "Irish Post", "h2", "", 20, "irishpost"],
 ]
