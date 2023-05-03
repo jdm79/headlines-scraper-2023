@@ -15,5 +15,7 @@ papers = [
     ["https://www.thesun.ie/", "The Irish Sun", "h2", "nk-headline-heading css-1r6h6ly", 14, "irishsun"],
     ["https://www.heraldscotland.com/", "The Herald", "a", "mar-lead-story__link", 15, "herald"],
     ["https://www.dailymail.co.uk/home/index.html", "Mail Online", "h2", "linkro-darkred", 16, "mail"],
-    ["https://www.dailyrecord.co.uk", "Daily Record", "a", "headline publication-font", 17, "record"]
+    ["https://www.dailyrecord.co.uk", "Daily Record", "a", "headline publication-font", 17, "record"],
+    ["https://www.irishtimes.com", "Irish Times", "a", "text_decoration_none color_custom_black_1", 18, "irishtimes"],
+
 ]

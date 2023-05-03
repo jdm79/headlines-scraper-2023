@@ -54,7 +54,6 @@ def scrapeHeadlines():
     
     # this is just to print out stuff in the terminal
     scrape_results.append({
-                    'id': paper_id,
                     'paper': newspaper,
                     'headline': headline,
                     'css name': css_name
