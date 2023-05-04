@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from difflib import restore
 from venv import create
 import requests
@@ -9,6 +11,8 @@ import database
 from papers import papers
 import datetime
 from pprint import pprint
+
+* * * * *  cd /Users/jamesdanielmalvern/femicide-scraper/  && ./test.py
 
 db_url = "postgres://oxbvadmp:3g1tL7uVL15a1qb_5l-x81jDlxp2X-fr@rogue.db.elephantsql.com/oxbvadmp"
 
@@ -44,7 +48,7 @@ def scrapeHeadlines():
     else:
       headline_html = soup.find(paper[2], class_=paper[3])
 
-    if headline_html != None:
+    if (headline_html != None or headline_html != ""):
       headline = headline_html.text.strip()
     else:
       headline = fail 
