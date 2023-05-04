@@ -12,8 +12,6 @@ from papers import papers
 import datetime
 from pprint import pprint
 
-* * * * *  cd /Users/jamesdanielmalvern/femicide-scraper/  && ./test.py
-
 db_url = "postgres://oxbvadmp:3g1tL7uVL15a1qb_5l-x81jDlxp2X-fr@rogue.db.elephantsql.com/oxbvadmp"
 
 scrape_results = []
