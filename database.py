@@ -8,7 +8,7 @@ CREATE_HEADLINES = """CREATE TABLE IF NOT EXISTS headlines (
     url TEXT,
     paper TEXT,
     timestamp TEXT,
-    paper_id TEXT,
+    paper_id INTEGER,
     css_name TEXT
     );"""
 INSERT_HEADLINE = "INSERT INTO headlines (headline, url, paper, timestamp, paper_id, css_name) VALUES (%s, %s, %s, %s, %s, %s);"
