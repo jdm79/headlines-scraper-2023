@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 from difflib import restore
 from venv import create
@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup
 import database
 from papers import papers
 import datetime
+import time
 from pprint import pprint
 
 db_url = "postgres://oxbvadmp:3g1tL7uVL15a1qb_5l-x81jDlxp2X-fr@rogue.db.elephantsql.com/oxbvadmp"
@@ -61,7 +62,14 @@ def scrapeHeadlines():
                     'css name': css_name
                     })
 
-for paper in papers:
-    scrapeHeadlines()
+while True:
+  timestamp = '{:%b-%d-%Y %H:%M:%S}'.format(datetime.datetime.now())
 
-pprint(scrape_results)
+  for paper in papers:
+    scrapeHeadlines()
+  time.sleep(300)
+  pprint("Scraped at:" + timestamp)
+
+
+
+# pprint(scrape_results)
