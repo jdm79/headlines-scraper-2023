@@ -1,36 +1,29 @@
+#!/usr/bin/python3
+
 from difflib import restore
 from venv import create
+import requests
 from requests import get
 import random
 import psycopg2
 from bs4 import BeautifulSoup
 import database
-import requests
+from papers import papers
 import datetime
+import time
+from pprint import pprint
+import os
+from dotenv import load_dotenv
 
-db_url = "postgres://oxbvadmp:r5tJzuWI1-7XXKq1noJPVsoxFSQNfjG-@rogue.db.elephantsql.com/oxbvadmp"
+load_dotenv()
 
+MY_DB_URL = os.getenv('MY_DB_URL')
 
-fail = "Error - failed to scrape the text of this article from " 
-
-
-papers = [
-    [1, "https://www.mirror.co.uk/", "The Daily Mirror", "h2", "story__title"],
-    [2, "https://www.theguardian.com/uk", "The Guardian", "span", "js-headline-text"],
-    [3, "https://www.thesun.co.uk/", "The Sun", "p", "teaser__subdeck"],
-    [4, "https://www.ft.com/world/uk", "The Financial Times", "div", "o-teaser__heading"],
-    [5, "https://www.dailymail.co.uk/home/index.html", "The Daily Mail", "h2", "linkro-darkred"],
-    [6, "https://www.thetimes.co.uk/", "The Times", "h3", "Headline--xl"]
-
-]
 scrape_results = []
-
 
 def scrapeHeadlines():
 
-    connection = psycopg2.connect(db_url)
-
-
+    connection = psycopg2.connect(MY_DB_URL)
     randomUrls = [ 
     "https://www.facebook.com/", 
     "https://www.google.co.uk", 
@@ -42,34 +35,41 @@ def scrapeHeadlines():
         'Referer': random.choice(randomUrls) 
         }
 
-    fail = "Sorry but we could not get the headline for " + str(paper[2])
+    fail = "Sorry but we cannot currently get the headline for " + str(paper[1])
     timestamp = '{:%b-%d-%Y %H:%M:%S}'.format(datetime.datetime.now())
-    id = paper[0]
-    url = paper[1]
-    newspaper = paper[2]
+    url = paper[0]
+    newspaper = paper[1]
+    paper_id = paper[4]
+    css_name = paper[5]
 
     results = requests.get(url, headers=headers)
     soup = BeautifulSoup(results.text, "html.parser")
-    headline_html = soup.find(paper[3], class_=paper[4])
 
-    if headline_html != None:
+
+    if paper[5] == "indy":
+      headline_html = soup.findAll('h2')[3]
+    else:
+      headline_html = soup.find(paper[2], class_=paper[3])
+
+    if (headline_html != None or headline_html != ""):
       headline = headline_html.text.strip()
     else:
       headline = fail 
 
     database.create_tables(connection)
-
-    database.add_headline(connection, headline, url, newspaper, timestamp)
+    database.add_headline(connection, headline, url, newspaper, timestamp, paper_id, css_name)
     
-    # scrape_results.append({
-    #                 'id': id,
-    #                 'paper': newspaper,
-    #                 'headline': headline
-    #                 })
-
+    # this is just to print out stuff in the terminal
+    scrape_results.append({
+                    'paper': newspaper,
+                    'headline': headline,
+                    'css name': css_name
+                    })
 
 
 for paper in papers:
-    scrapeHeadlines()
+  scrapeHeadlines()
 
-print(scrape_results)
+
+
+# pprint(scrape_results)

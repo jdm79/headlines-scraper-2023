@@ -1,9 +1,13 @@
 import database
 import psycopg2
+from dotenv import load_dotenv
 
-db_url = "postgres://oxbvadmp:3g1tL7uVL15a1qb_5l-x81jDlxp2X-fr@rogue.db.elephantsql.com/oxbvadmp"
+load_dotenv()
 
-connection = psycopg2.connect(db_url)
+MY_DB_URL = os.getenv('MY_DB_URL')
+
+
+connection = psycopg2.connect(MY_DB_URL)
 
 
 database.create_tables(connection)
