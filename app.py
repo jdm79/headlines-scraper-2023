@@ -66,10 +66,7 @@ def scrapeHeadlines():
                     'css name': css_name
                     })
 
-
 for paper in papers:
   scrapeHeadlines()
-
-
 
 # pprint(scrape_results)

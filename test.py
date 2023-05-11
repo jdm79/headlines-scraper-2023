@@ -7,15 +7,14 @@ from bs4 import BeautifulSoup
 import database
 import requests
 import datetime
+import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
 MY_DB_URL = os.getenv('MY_DB_URL')
 
-
 fail = "Error - failed to scrape the text of this article from " 
-
 
 papers = [
     [1, "https://www.mirror.co.uk/", "The Daily Mirror", "h2", "story__title"],
@@ -32,7 +31,6 @@ scrape_results = []
 def scrapeHeadlines():
 
     connection = psycopg2.connect(MY_DB_URL)
-
 
     randomUrls = [ 
     "https://www.facebook.com/", 
@@ -64,13 +62,12 @@ def scrapeHeadlines():
 
     database.add_headline(connection, headline, url, newspaper, timestamp)
     
-    # scrape_results.append({
-    #                 'id': id,
-    #                 'paper': newspaper,
-    #                 'headline': headline
-    #                 })
-
-
+    # this is just for printing on console purposes - does not go to db
+    scrape_results.append({
+                    'id': id,
+                    'paper': newspaper,
+                    'headline': headline
+                    })
 
 for paper in papers:
     scrapeHeadlines()
